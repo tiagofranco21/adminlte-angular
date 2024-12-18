@@ -1,0 +1,19 @@
+<app-breadcrumb [title]="'Home'" [items]="breadcrumbs"></app-breadcrumb>
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <app-card
+        title="Statistics About Book Reads"
+        headerClass="bg-gradient-primary"
+      >
+        <app-read-statistics> </app-read-statistics>
+      </app-card>
+      <app-card
+        title="Statistics About Downloads"
+        headerClass="bg-gradient-info"
+      >
+        <app-download-statistics> </app-download-statistics>
+      </app-card>
+    </div>
+  </div>
+</div>

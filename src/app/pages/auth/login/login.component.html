@@ -1,0 +1,87 @@
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-logo">Admin<b>LTE</b></div>
+    <div class="card">
+      <div class="card-body login-card-body">
+        <p class="login-box-msg">
+          {{ 'Sign in to start your session' | translate }}
+        </p>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <div class="input-group mb-3">
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Email"
+              formControlName="email"
+              [class.is-invalid]="
+                loginForm.get('email')?.invalid &&
+                loginForm.get('email')?.touched
+              "
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                loginForm.get('email')?.invalid &&
+                loginForm.get('email')?.touched
+              "
+            >
+              {{ 'Please enter a valid email.' | translate }}
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Password"
+              formControlName="password"
+              [class.is-invalid]="
+                loginForm.get('password')?.invalid &&
+                loginForm.get('password')?.touched
+              "
+            />
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+            <div
+              class="invalid-feedback"
+              *ngIf="
+                loginForm.get('password')?.invalid &&
+                loginForm.get('password')?.touched
+              "
+            >
+              {{ 'Password is required.' | translate }}
+            </div>
+          </div>
+
+          <div class="row justify-content-end">
+            <div class="col-8">
+              <a routerLink="/register" class="text-center">{{
+                'Create a user' | translate
+              }}</a>
+            </div>
+            <div class="col-4">
+              <button
+                [disabled]="isSubmitting"
+                type="submit"
+                class="btn btn-primary btn-block"
+              >
+                <span *ngIf="!isSubmitting">{{ 'Sign In' | translate }}</span>
+                <span *ngIf="isSubmitting">{{
+                  'Please wait...' | translate
+                }}</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

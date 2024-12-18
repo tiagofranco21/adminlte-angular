@@ -1,0 +1,192 @@
+<app-breadcrumb
+  [title]="isEdit ? 'Edit Book' : 'Add Book'"
+  [items]="[
+    { label: 'Dashboard', url: '/dashboard' },
+    { label: 'Books', url: '/dashboard/books' },
+    { label: isEdit ? 'Edit Book' : 'Add Book' },
+  ]"
+></app-breadcrumb>
+
+<div class="content">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-md-12">
+        <div class="card shadow-sm">
+          <div class="card-header bg-primary text-white">
+            <h5 class="m-0">{{ 'Book Form' | translate }}</h5>
+          </div>
+          <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+            <div class="card-body">
+              <!-- Title -->
+              <div class="form-group">
+                <label for="title">{{ 'Title' | translate }}</label>
+                <input
+                  id="title"
+                  type="text"
+                  formControlName="title"
+                  class="form-control"
+                  [class.is-invalid]="
+                    bookForm.get('title')?.invalid &&
+                    bookForm.get('title')?.touched
+                  "
+                />
+                <div
+                  *ngIf="
+                    bookForm.get('title')?.invalid &&
+                    bookForm.get('title')?.touched
+                  "
+                  class="invalid-feedback"
+                >
+                  {{ 'Title is required.' | translate }}
+                </div>
+              </div>
+
+              <!-- Abstract -->
+              <div class="form-group">
+                <label for="abstract">{{ 'Abstract' | translate }}</label>
+                <textarea
+                  id="abstract"
+                  formControlName="abstract"
+                  class="form-control"
+                  rows="3"
+                  [class.is-invalid]="
+                    bookForm.get('abstract')?.invalid &&
+                    bookForm.get('abstract')?.touched
+                  "
+                ></textarea>
+                <div
+                  *ngIf="
+                    bookForm.get('abstract')?.invalid &&
+                    bookForm.get('abstract')?.touched
+                  "
+                  class="invalid-feedback"
+                >
+                  {{ 'Abstract is required.' | translate }}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <!-- Year -->
+                  <div class="form-group">
+                    <label for="year">{{ 'Year' | translate }}</label>
+                    <input
+                      id="year"
+                      type="number"
+                      formControlName="year"
+                      class="form-control"
+                      [class.is-invalid]="
+                        bookForm.get('year')?.invalid &&
+                        bookForm.get('year')?.touched
+                      "
+                    />
+                    <div
+                      *ngIf="
+                        bookForm.get('year')?.invalid &&
+                        bookForm.get('year')?.touched
+                      "
+                      class="invalid-feedback"
+                    >
+                      {{ 'Year must be between 1900 and' | translate }}
+                      {{ currentYear }}.
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <!-- Status -->
+                  <div class="form-group">
+                    <label for="status">{{ 'Status' | translate }}</label>
+                    <select
+                      id="status"
+                      formControlName="status"
+                      class="form-control"
+                    >
+                      <option value="active">{{ 'Active' | translate }}</option>
+                      <option value="inactive">
+                        {{ 'Inactive' | translate }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Authors -->
+              <div class="form-group">
+                <span>{{ 'Authors' | translate }}</span>
+                <ng-container formArrayName="authors">
+                  <ng-container
+                    *ngFor="let authorForm of authors.controls; let i = index"
+                  >
+                    <div class="row mb-2" [formGroupName]="i">
+                      <div class="col-md-5">
+                        <input
+                          type="text"
+                          formControlName="first_name"
+                          placeholder="{{ 'First Name' | translate }}"
+                          class="form-control"
+                          [class.is-invalid]="
+                            authorForm.get('first_name')?.invalid &&
+                            authorForm.get('first_name')?.touched
+                          "
+                        />
+                        <div
+                          *ngIf="
+                            authorForm.get('first_name')?.invalid &&
+                            authorForm.get('first_name')?.touched
+                          "
+                          class="invalid-feedback"
+                        >
+                          {{ 'First name is required.' | translate }}
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <input
+                          type="text"
+                          formControlName="last_name"
+                          placeholder="{{ 'Last Name' | translate }}"
+                          class="form-control"
+                        />
+                      </div>
+                      <div class="col-md-2">
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          (click)="removeAuthor(i)"
+                        >
+                          {{ 'Remove' | translate }}
+                        </button>
+                      </div>
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <button
+                  type="button"
+                  class="btn btn-secondary mt-2"
+                  (click)="addAuthor()"
+                >
+                  {{ 'Add Author' | translate }}
+                </button>
+              </div>
+            </div>
+            <div class="card-footer">
+              <button
+                type="button"
+                class="btn btn-light float-left"
+                (click)="goBack()"
+              >
+                {{ 'Cancel' | translate }}
+              </button>
+
+              <button
+                type="submit"
+                class="btn btn-primary float-right"
+                [disabled]="bookForm.invalid"
+              >
+                {{ isEdit ? 'Update Book' : ('Create Book' | translate) }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

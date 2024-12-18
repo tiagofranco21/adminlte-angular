@@ -1,0 +1,36 @@
+<div class="card">
+  <div
+    class="card-header"
+    [ngClass]="headerClass ? headerClass : 'bg-gradient-primary'"
+  >
+    <h3 class="card-title">{{ title | translate }}</h3>
+    <div class="card-tools">
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-sm text-white"
+          data-card-widget="collapse"
+        >
+          <i class="fas fa-minus"></i>
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-sm text-white ml-2"
+          (click)="toggleMaximize()"
+        >
+          <i
+            [ngClass]="{
+              'fa fa-expand': !isMaximized,
+              'fas fa-compress': isMaximized,
+            }"
+          ></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
+</div>

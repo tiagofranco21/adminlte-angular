@@ -1,0 +1,149 @@
+<div class="register-box">
+  <div class="register-logo">
+    <a href="#"><b>Admin</b>LTE</a>
+  </div>
+
+  <div class="card">
+    <div class="card-body register-card-body">
+      <p class="login-box-msg">{{ 'Register a new membership' | translate }}</p>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <!-- Full Name -->
+        <div class="form-group">
+          <label for="name">{{ 'Full name' | translate }}</label>
+          <input
+            type="text"
+            class="form-control"
+            [class.is-invalid]="
+              registerForm.get('name')?.invalid &&
+              registerForm.get('name')?.touched
+            "
+            id="name"
+            formControlName="name"
+            placeholder="{{ 'Enter your full name' | translate }}"
+            aria-describedby="name-error"
+          />
+          <span
+            id="name-error"
+            class="error invalid-feedback"
+            *ngIf="
+              registerForm.get('name')?.invalid &&
+              registerForm.get('name')?.touched
+            "
+          >
+            {{ 'Name is required.' | translate }}
+          </span>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            [class.is-invalid]="
+              registerForm.get('email')?.invalid &&
+              registerForm.get('email')?.touched
+            "
+            id="email"
+            formControlName="email"
+            placeholder="{{ 'Enter email' | translate }}"
+            aria-describedby="email-error"
+          />
+          <span
+            id="email-error"
+            class="error invalid-feedback"
+            *ngIf="
+              registerForm.get('email')?.invalid &&
+              registerForm.get('email')?.touched
+            "
+          >
+            {{ 'Valid email is required.' | translate }}
+          </span>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">{{ 'Password' | translate }}</label>
+          <input
+            type="password"
+            class="form-control"
+            [class.is-invalid]="
+              registerForm.get('password')?.invalid &&
+              registerForm.get('password')?.touched
+            "
+            id="password"
+            formControlName="password"
+            placeholder="{{ 'Password' | translate }}"
+            aria-describedby="password-error"
+          />
+          <span
+            id="password-error"
+            class="error invalid-feedback"
+            *ngIf="
+              registerForm.get('password')?.invalid &&
+              registerForm.get('password')?.touched
+            "
+          >
+            {{ 'Password must be at least 6 characters.' | translate }}
+          </span>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirmPassword">{{
+            'Confirm password' | translate
+          }}</label>
+          <input
+            type="password"
+            class="form-control"
+            [class.is-invalid]="
+              registerForm.get('confirmPassword')?.touched &&
+              (registerForm.get('confirmPassword')?.invalid ||
+                registerForm.hasError('passwordsMismatch'))
+            "
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            placeholder="{{ 'Retype password' | translate }}"
+            aria-describedby="confirmPassword-error"
+          />
+          <span
+            class="error invalid-feedback"
+            *ngIf="
+              registerForm.get('confirmPassword')?.touched &&
+              registerForm.hasError('passwordsMismatch')
+            "
+          >
+            {{ 'Passwords do not match.' | translate }}
+          </span>
+          <span
+            *ngIf="
+              registerForm.get('confirmPassword')?.invalid &&
+              registerForm.get('confirmPassword')?.touched &&
+              registerForm.controls['confirmPassword'].hasError('required')
+            "
+            class="invalid-feedback"
+          >
+            {{ 'Confirm password is required.' | translate }}
+          </span>
+        </div>
+
+        <!-- Buttons  [disabled]="isSubmitting"-->
+        <div class="row justify-content-end">
+          <div class="col-8">
+            <a routerLink="/login">
+              {{ 'I already have a login' | translate }}
+            </a>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-primary btn-block">
+              {{ 'Register' | translate }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- /.form-box -->
+  </div>
+  <!-- /.card -->
+</div>

@@ -1,0 +1,58 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">BookStore</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNav"
+    aria-controls="navbarNav"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <button class="btn btn-primary" (click)="login()">Login</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="jumbotron text-center">
+  <h1 class="display-4">Welcome to BookStore!</h1>
+  <p class="lead">Explore a wide range of books available for you.</p>
+</div>
+
+<!-- Books Section -->
+<div class="container">
+  <h2 class="mb-4 text-center">Available Books</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let book of books">
+      <div class="card mb-4 shadow-sm">
+        <img
+          src="https://via.placeholder.com/150"
+          class="card-img-top"
+          alt="{{ book.title }}"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <p class="card-text">
+            <strong>Author:</strong> {{ book.authors }}
+            <br />
+            <strong>Year:</strong> {{ book.year }}
+          </p>
+          <button class="btn btn-outline-primary btn-block">Read Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center py-4">
+  <p>&copy; 2024 BookStore. All Rights Reserved.</p>
+</footer>

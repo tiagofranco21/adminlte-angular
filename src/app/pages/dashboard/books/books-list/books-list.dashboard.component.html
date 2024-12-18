@@ -1,0 +1,27 @@
+<app-breadcrumb
+  [title]="'Books List'"
+  [items]="[
+    { label: 'Dashboard', url: '/dashboard' },
+    { label: 'Books', url: '/dashboard/books' },
+  ]"
+></app-breadcrumb>
+
+<div class="container-fluid">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary">
+      <button class="btn btn-light float-right" (click)="goToBooks()">
+        {{ 'Add New Book' | translate }}
+      </button>
+    </div>
+
+    <div class="card-body">
+      <app-dynamic-table
+        [data$]="books$"
+        [columns]="columns"
+        [downloadable]="true"
+        (editItemEvent)="onEditBook($event)"
+        (deleteItemEvent)="onDeleteBook($event)"
+      ></app-dynamic-table>
+    </div>
+  </div>
+</div>
